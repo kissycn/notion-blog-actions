@@ -20,7 +20,7 @@ jobs:
         token: ${{ secrets.NOTION_TOKEN }}
         token_v2: ${{ secrets.NOTION_TOKEN_V2 }}
         space_id: "37a5dd0cc1a44bb496c373376e6e6b19"
-        database_id: "b2e0cbe4c8ef4e7388afe89dda453acb"
+        database_id: "37a5dd0cc1a44bb496c373376e6e6b19"
         output: "./tmp/"
 
     - name: "migrate image"
