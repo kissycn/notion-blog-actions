@@ -6,6 +6,11 @@ jobs:
   notion:
     runs-on: ubuntu-latest
     steps:
+    - name: "test"
+      run : |
+        echo ${{ secrets.NOTION_TOKEN }}
+        echo ${{ secrets.NOTION_TOKEN_V2 }}
+        
     - uses: actions/checkout@master
       with:
         submodules: false
