@@ -1,36 +1,40 @@
-# This is a basic workflow to help you get started with Actions
+on: [workflow_dispatch, watch]
 
-name: CI
+name: notion
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  notion:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@master
+      with:
+        submodules: false
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+    - uses: kissycn/notion-blog-actions/notion@main
+      with:
+        token: ${{ secrets.NOTION_TOKEN }}
+        token_v2: ${{ secrets.NOTION_TOKEN_V2 }}
+        space_id: "37a5dd0cc1a44bb496c373376e6e6b19"
+        database_id: "7e92f27576804cd7804e09bac0a1e16d"
+        output: "./tmp/"
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+    - name: "migrate image"
+      uses: kissycn/notion-blog-actions/migrate@main
+      with:
+        input: "./tmp/*.md"
+
+    - name: "cp md files"
+      run: |
+        cp -f tmp/*.md source/_posts/notion/
+        rm -rf tmp
+
+    - name: git setting
+      run: |
+        git config --global user.email "你的邮箱"
+        git config --global user.name "你的用户名"
+      
+    - name: update blog
+      run: |
+        git add source
+        git commit -m "feat: auto update by notion sync"
+        git push
