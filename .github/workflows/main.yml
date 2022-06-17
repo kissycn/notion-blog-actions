@@ -19,7 +19,7 @@ jobs:
       with:
         token: ${{ secrets.NOTION_TOKEN }}
         token_v2: ${{ secrets.NOTION_TOKEN_V2 }}
-        space_id: "37a5dd0cc1a44bb496c373376e6e6b19"
+        space_id: "fda5eb71-06df-459b-ab02-30aa85a3a143"
         database_id: "37a5dd0cc1a44bb496c373376e6e6b19"
         output: "./tmp/"
 
