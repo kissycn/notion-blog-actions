@@ -20,7 +20,7 @@ jobs:
         token: ${{ secrets.NOTION_TOKEN }}
         token_v2: ${{ secrets.NOTION_TOKEN_V2 }}
         space_id: "fda5eb71-06df-459b-ab02-30aa85a3a143"
-        database_id: "37a5dd0cc1a44bb496c373376e6e6b19"
+        database_id: "851d6c61c250495f9337be5527360d68"
         output: "./tmp/"
 
     - name: "migrate image"
@@ -35,8 +35,8 @@ jobs:
 
     - name: git setting
       run: |
-        git config --global user.email "你的邮箱"
-        git config --global user.name "你的用户名"
+        git config --global user.email "kissycn@gmail.com"
+        git config --global user.name "kissycn"
       
     - name: update blog
       run: |
