@@ -128,7 +128,7 @@ class notion {
       "status",
       "tags",
       "urlname",
-      "show_category",
+      "category_bar",
       "index_img",
     ];
     let pattern = `(${keys.join("|")}):\\s(.*)\n`;
